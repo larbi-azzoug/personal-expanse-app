@@ -18,9 +18,9 @@ class _TransactionListState extends State<TransactionList> {
   Widget build(BuildContext context) {
     return Container(
       height: 500,
-      child: ListView(
-        children: widget.transactions.map((tx) {
-          return Card(
+      child: ListView.builder(
+        itemBuilder: (ctx, index){
+            return Card(
             child: Row(
               children: [
                 Container(
@@ -33,7 +33,7 @@ class _TransactionListState extends State<TransactionList> {
                   ),
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    '\$${tx.amount}',
+                    '\$${widget.transactions[index].amount}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -45,7 +45,7 @@ class _TransactionListState extends State<TransactionList> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      tx.title,
+                      widget.transactions[index].title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -53,7 +53,7 @@ class _TransactionListState extends State<TransactionList> {
                       ),
                     ),
                     Text(
-                      DateFormat.yMMMd().format(tx.date),
+                      DateFormat.yMMMd().format(widget.transactions[index].date),
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 12,
@@ -65,7 +65,8 @@ class _TransactionListState extends State<TransactionList> {
               ],
             ),
           );
-        }).toList(),
+        },
+        itemCount: widget.transactions.length,
       ),
     );
   }
