@@ -14,10 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Personal Expanse App',
+      title: 'Personal Expanses',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        //   primarySwatch: Colors.green,
+        // useMaterial3: true,
+
+        // Define the default brightness and colors.
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.purple,
+        ),
       ),
       home: MyHomePage(),
     );
@@ -56,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     setState(() {
       _userTransactions.add(newTx);
-    }); 
+    });
   }
 
   void _startAddNewTransaction(BuildContext ctx) {
@@ -71,11 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text('Personal Expanse App'),
         actions: [
           IconButton(
-            onPressed: ()=>_startAddNewTransaction(context),
+            onPressed: () => _startAddNewTransaction(context),
             icon: Icon(Icons.add),
           )
         ],
@@ -98,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()=>_startAddNewTransaction(context),
+        onPressed: () => _startAddNewTransaction(context),
         child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

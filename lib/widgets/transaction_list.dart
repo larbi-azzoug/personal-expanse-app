@@ -3,29 +3,30 @@ import 'package:intl/intl.dart';
 import 'package:personal_expanse_app/models/transaction.dart';
 
 class TransactionList extends StatefulWidget {
-final List<transaction> transactions;
+  final List<transaction> transactions;
 
-TransactionList(this.transactions);
+  TransactionList(this.transactions);
 
   @override
   State<TransactionList> createState() => _TransactionListState();
 }
 
 class _TransactionListState extends State<TransactionList> {
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 500,
       child: ListView.builder(
-        itemBuilder: (ctx, index){
-            return Card(
+        itemBuilder: (ctx, index) {
+          return Card(
             child: Row(
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.purple, width: 2),
+                    border: Border.all(
+                      color: Theme.of(context).primaryColor,
+                      width: 2,
+                    ),
                   ),
                   margin: EdgeInsets.symmetric(
                     vertical: 10,
@@ -37,7 +38,7 @@ class _TransactionListState extends State<TransactionList> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.purple,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
@@ -53,7 +54,8 @@ class _TransactionListState extends State<TransactionList> {
                       ),
                     ),
                     Text(
-                      DateFormat.yMMMd().format(widget.transactions[index].date),
+                      DateFormat.yMMMd()
+                          .format(widget.transactions[index].date),
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 12,
