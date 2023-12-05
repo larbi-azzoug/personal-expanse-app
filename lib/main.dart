@@ -20,6 +20,20 @@ class MyApp extends StatelessWidget {
         // useMaterial3: true,
 
         // Define the default brightness and colors.
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+                  headline6: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              )),
+              
+        appBarTheme: AppBarTheme(
+              titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          )),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.purple,
         ),
@@ -37,19 +51,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 //MyHomePage({super.key});
 
-  final List<transaction> _userTransactions = [
-    transaction(
-      amount: 69.99,
-      id: 't1',
-      title: 'New Shoes',
-      date: DateTime.now(),
-    ),
-    transaction(
-      amount: 16.53,
-      id: 't2',
-      title: 'Weekly Groceries',
-      date: DateTime.now(),
-    )
+   final List<transaction> _userTransactions = [
+  //   transaction(
+  //     amount: 69.99,
+  //     id: 't1',
+  //     title: 'New Shoes',
+  //     date: DateTime.now(),
+  //   ),
+  //   transaction(
+  //     amount: 16.53,
+  //     id: 't2',
+  //     title: 'Weekly Groceries',
+  //     date: DateTime.now(),
+  //   )
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
@@ -107,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      
     );
   }
 }
