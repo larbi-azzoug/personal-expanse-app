@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expanse_app/widgets/new_transaction.dart';
+import '../widgets/chart.dart';
+import '../widgets/new_transaction.dart';
 import '../models/transaction.dart';
 import '../widgets/transaction_list.dart';
 
@@ -22,18 +23,18 @@ class MyApp extends StatelessWidget {
         // Define the default brightness and colors.
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
-                  headline6: TextStyle(
-                fontFamily: 'OpenSans',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              )),
-              
+                headline6: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            )),
+
         appBarTheme: AppBarTheme(
-              titleTextStyle: TextStyle(
-            fontFamily: 'OpenSans',
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          )),
+            titleTextStyle: TextStyle(
+          fontFamily: 'OpenSans',
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        )),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.purple,
         ),
@@ -51,20 +52,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 //MyHomePage({super.key});
 
-   final List<transaction> _userTransactions = [
-  //   transaction(
-  //     amount: 69.99,
-  //     id: 't1',
-  //     title: 'New Shoes',
-  //     date: DateTime.now(),
-  //   ),
-  //   transaction(
-  //     amount: 16.53,
-  //     id: 't2',
-  //     title: 'Weekly Groceries',
-  //     date: DateTime.now(),
-  //   )
+  final List<transaction> _userTransactions = [
+    //   transaction(
+    //     amount: 69.99,
+    //     id: 't1',
+    //     title: 'New Shoes',
+    //     date: DateTime.now(),
+    //   ),
+    //   transaction(
+    //     amount: 16.53,
+    //     id: 't2',
+    //     title: 'Weekly Groceries',
+    //     date: DateTime.now(),
+    //   )
   ];
+
+  List<transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = transaction(
@@ -104,14 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: Card(
-                elevation: 5,
-                color: Colors.blue,
-                child: Text('Chart!'),
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),
@@ -121,7 +125,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      
     );
   }
 }
